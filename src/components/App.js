@@ -7,14 +7,17 @@ const App = () => {
   let [data, setData] = useState("");
   let [error, setError] = useState("");
 
-  function handleChange() {
+  function handleChange(event) {
+    event.preventDefault();
     fetch(`http://www.omdbapi.com/?s=${search}&apikey=${API_KEY}`)
       .then((res) => res.json())
       .then((res) => {
         if(res.Response == "True"){
           setData(res.Search);
+          setError("")
         }
         else{
+          setData("")
           setError("Invalid movie name. Please try again.")
         }
       })
@@ -25,14 +28,14 @@ const App = () => {
       {/* Do not remove the main div */}
       <div>
         <div>Search Movies</div>
-        <div>
+        <form onSubmit={handleChange}>
           <input
             type="search"
             onChange={(e) => setSearch(e.target.value)}
             value={search}
           ></input>
-          <button onClick={handleChange}>Search</button>
-        </div>
+          <input type="submit" value={"Search"}></input>
+        </form>
         <ul>
         {
           data.length > 0 &&
