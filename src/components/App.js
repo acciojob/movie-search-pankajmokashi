@@ -17,7 +17,6 @@ const App = () => {
           setError("")
         }
         else{
-          setData("")
           setError("Invalid movie name. Please try again.")
         }
       })
@@ -34,7 +33,7 @@ const App = () => {
             onChange={(e) => setSearch(e.target.value)}
             value={search}
           ></input>
-          <input type="submit" value={"Search"}></input>
+          <button type="submit">Search</button>
         </form>
         <ul>
         {
